@@ -19,7 +19,7 @@
     "tests:android:test": "yarn graphql:generate && detox test -c android.emu.debug --headless --record-logs all --loglevel verbose --record-videos all --take-screenshots failing",
     "start:android:test": "DETOX_TESTS=true expo start --dev-client",
     "tests:ios:build": "yarn detox build --configuration ios.sim.debug",
-    "tests:ios:pod:install": "cd ios && rm -rf kc.xcworkspace && rm -f Podfile.lock && pod install --repo-update && cd ..",
+    "tests:ios:pod:install": "cd ios && rm -rf lexicon.xcworkspace && rm -f Podfile.lock && pod install --repo-update && cd ..",
     "tests:ios:test": "yarn graphql:generate && detox test --configuration ios.sim.debug --cleanup --record-logs all --loglevel verbose --record-videos failing",
     "android": "expo run:android",
     "ios": "expo run:ios"
