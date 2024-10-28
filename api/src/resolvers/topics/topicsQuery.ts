@@ -85,6 +85,7 @@ let topicsQuery = queryField('topics', {
   args: {
     sort: arg({ type: 'TopicsSortEnum' }),
     categoryId: nullable(intArg()),
+    slug: nullable(stringArg()),
     topPeriod: nullable(arg({ type: 'TopPeriodEnum' })),
     tag: nullable(stringArg()),
     page: nullable(intArg()),

@@ -8,6 +8,7 @@ export const GET_CHANNELS = gql`
         color
         name
         descriptionText
+        slug
       }
     }
   }

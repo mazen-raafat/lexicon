@@ -43,6 +43,13 @@ export function BottomMenu(props: Props) {
     Keyboard.dismiss();
   };
 
+  function pollAllowed() {
+    return onInsertPoll &&
+        pollSetting?.allowPoll &&
+        userTrustLevel &&
+        pollSetting.pollCreateMinimumTrustLevel <= userTrustLevel;
+  }
+
   return (
     <View style={styles.container}>
       {showLeftMenu && (
@@ -117,19 +124,16 @@ export function BottomMenu(props: Props) {
               testID="BottomMenu:Link"
             />
             <Divider vertical />
-            {onInsertPoll &&
-              pollSetting?.allowPoll &&
-              userTrustLevel &&
-              pollSetting.pollCreateMinimumTrustLevel <= userTrustLevel && (
-                <Icon
-                  name="Chart"
-                  size="l"
-                  color={colors.textLighter}
-                  onPress={onInsertPoll}
-                  style={styles.iconButton}
-                  testID="BottomMenu:IconPoll"
-                />
-              )}
+            {pollAllowed() ? (
+                  <Icon
+                      name="Chart"
+                      size="l"
+                      color={colors.textLighter}
+                      onPress={onInsertPoll}
+                      style={styles.iconButton}
+                      testID="BottomMenu:IconPoll"
+                  />
+            ) : null}
             <Divider vertical />
           </View>
         </ScrollView>

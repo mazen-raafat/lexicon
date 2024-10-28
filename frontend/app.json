@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "<insert your app name>",
-    "slug": "<insert your app name>",
-    "scheme": "your-scheme-here",
+    "name": "KC",
+    "slug": "KC",
+    "scheme": "kc",
     "currentFullName": "@<username>/<slugName>",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,16 +18,30 @@
         "@config-plugins/detox",
         {
           "skipProguard": false,
-          "subdomains": ["localhost", "10.0.2.2"]
+          "subdomains": [
+            "localhost",
+            "10.0.2.2"
+          ]
         }
       ],
-      "./src/plugins/Notification.js"
+      "./src/plugins/Notification.js",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
+        }
+      ]
+
     ],
     "userInterfaceStyle": "automatic",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
@@ -44,21 +58,21 @@
         "svg"
       ]
     },
-    "notification":{
-      "icon":"./assets/iconNotifications.png"
-   },
+    "notification": {
+      "icon": "./assets/iconNotifications.png"
+    },
     "ios": {
       "supportsTablet": false,
       "buildNumber": "1.0.0",
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.kfox.insertyourappname"
+      "bundleIdentifier": "com.kc"
     },
     "android": {
       "permissions": [],
       "versionCode": 1,
-      "package": "com.kfox.insertyourappname"
+      "package": "com.kc"
     },
     "web": {
       "favicon": "./assets/favicon.png"
