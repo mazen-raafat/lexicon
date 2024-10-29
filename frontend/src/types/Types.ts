@@ -14,6 +14,7 @@ import { Poll, PollsVotes, User } from './Post';
 let ChannelRecord = runtypes.Record({
   id: runtypes.Number,
   name: runtypes.String,
+  slug: runtypes.String.Or(runtypes.Null),
   description: runtypes.String.Or(runtypes.Null),
   color: runtypes.String,
 });

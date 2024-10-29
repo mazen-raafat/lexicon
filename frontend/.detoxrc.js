@@ -12,9 +12,9 @@ module.exports = {
   apps: {
     'ios.debug': {
       type: 'ios.app',
-      binaryPath: 'bin/IOS/insertyourappname.app',
+      binaryPath: 'bin/IOS/lexicon.app',
       build:
-        'xcodebuild -workspace ios/insertyourappname.xcworkspace -scheme insertyourappname -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | npx excpretty ./',
+        'xcodebuild -workspace ios/lexicon.xcworkspace -scheme lexicon -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | npx excpretty ./',
     },
     'android.debug': {
       type: 'android.apk',

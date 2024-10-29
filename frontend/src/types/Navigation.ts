@@ -223,6 +223,7 @@ export type RootStackParamList = {
 export type TabParamList = {
   Home: undefined | HomeProps;
   Profile: undefined;
+  Messages: undefined;
 };
 
 export type RootStackRouteName = keyof RootStackParamList;

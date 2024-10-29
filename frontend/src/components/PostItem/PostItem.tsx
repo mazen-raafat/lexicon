@@ -13,6 +13,7 @@ import { PollPreview } from '../Poll';
 
 import { PostGroupings } from './PostGroupings';
 import { PostHidden } from './PostHidden';
+import {renderEmojis} from "../../helpers/renderEmojis";
 
 type Props = ViewProps & {
   topicId: number;
@@ -181,7 +182,7 @@ function BasePostItem(props: Props) {
           color={isTapToView ? 'primary' : color}
           variant={isTapToView ? 'bold' : 'normal'}
         >
-          {unescapeHTML(content)}
+          {renderEmojis(unescapeHTML(content))}
         </Text>
       )}
     </>

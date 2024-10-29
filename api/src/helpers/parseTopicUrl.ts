@@ -10,23 +10,22 @@ export type FilterInput = {
     | null;
   tag?: string | null;
   categoryId?: number | null;
+  slug?: string | null;
 };
 
-let parseTopicUrl = ({ sort, topPeriod, tag, categoryId }: FilterInput) => {
+const parseTopicUrl = ({ sort, topPeriod, tag, categoryId, slug }: FilterInput) => {
   let sortBy = sort.toLowerCase();
   if (sort === 'TOP' && topPeriod && !tag) {
     sortBy = `${sortBy}/${topPeriod.toLowerCase()}`;
   }
   if (categoryId) {
     if (tag) {
-      sortBy = `tags/c/${categoryId}/${tag}/l/${sortBy}`;
+      sortBy = `tags/c/${slug}/${categoryId}/${tag}/l/${sortBy}`;
     } else {
-      sortBy = `c/${categoryId}/l/${sortBy}`;
+      sortBy = `c/${slug}/${categoryId}/l/${sortBy}`;
     }
-  } else {
-    if (tag) {
-      sortBy = `tag/${tag}/l/${sortBy}`;
-    }
+  } else if (tag) {
+    sortBy = `tag/${tag}/l/${sortBy}`;
   }
   return sortBy;
 };

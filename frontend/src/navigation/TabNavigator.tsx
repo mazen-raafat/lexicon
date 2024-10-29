@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import { Icon, Text } from '../core-ui';
-import { Home as HomeScene, Profile as ProfileScene } from '../screens';
+import {Home as HomeScene, Messages, Profile as ProfileScene} from '../screens';
 import { makeStyles, useTheme } from '../theme';
 import { TabParamList } from '../types';
 import { useAuth } from '../utils/AuthProvider';
@@ -20,6 +20,29 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
   const { colors } = useTheme();
   const useAuthResults = useAuth();
 
+  function getIconName(route: { name: string }) {
+    route
+    if (route.name === 'Home') {
+      return 'Home';
+    } else if (route.name === 'Profile') {
+      return 'Person';
+    } else if (route.name === 'Messages') {
+      return 'Mail';
+    } else {
+      return 'Home';
+    }
+  }
+
+  function getTestID(route: { name: string }) {
+    if (route.name === 'Home') {
+      return 'Tab:Home';
+    } else if (route.name === 'Profile') {
+      return 'Tab:Person';
+    } else if (route.name === 'Messages') {
+      return 'Tab:Messages';
+    }
+  }
+
   return (
     <View style={styles.tabContainer}>
       {state.routes.map((route: { name: string }, index: number) => {
@@ -28,7 +51,7 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
           if (state.index === 0 && state.index === index) {
             navigate(route.name, { backToTop: true });
           } else {
-            if (route.name === 'Profile' && !token) {
+            if ((route.name === 'Profile' || route.name === 'Messages') && !token) {
               navigate('Login');
               return;
             }
@@ -42,7 +65,7 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
             onPress={onPress}
             style={styles.tab}
             activeOpacity={state.index === index ? 1 : 0.2}
-            testID={route.name === 'Profile' ? 'Tab:Profile' : 'Tab:Home'}
+            testID={getTestID(route)}
           >
             <View
               style={[
@@ -51,7 +74,7 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
               ]}
             >
               <Icon
-                name={route.name === 'Home' ? 'Home' : 'Person'}
+                name={getIconName(route)}
                 size="xl"
                 color={
                   state.index === index ? colors.activeTab : colors.inactiveTab
@@ -81,6 +104,11 @@ export default function TabNavigator() {
         name="Home"
         component={HomeScene}
         options={{ headerShown: false }}
+      />
+      <Tab.Screen
+          name="Messages"
+          component={Messages}
+          options={{ title: t('Messages') }}
       />
       <Tab.Screen
         name="Profile"

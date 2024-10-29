@@ -54,6 +54,8 @@ function handleRegexResult(
     regex === imageRegex ||
     regex === mentionRegex
   ) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     result = result.map((item) => item.replace(regex, '$1'));
 
     return result.map((item) => {

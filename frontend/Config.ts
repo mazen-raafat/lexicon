@@ -17,8 +17,8 @@ const config: Config = {
    * to EAS Build.
    */
   localDevelopment: {
-    proseUrl: 'http://localhost:8929',
-    inferDevelopmentHost: true, // Specific to local development with Expo Go & the Android simulator. See docs.
+    proseUrl: 'https://toad-rapid-dove.ngrok-free.app',
+    inferDevelopmentHost: false, // Specific to local development with Expo Go & the Android simulator. See docs.
   },
   /**
    * `buildChannels` refers to channels within Expo's EAS Build service, which are defined in

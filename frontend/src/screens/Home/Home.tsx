@@ -163,6 +163,9 @@ export default function Home() {
   const [selectedChannelId, setSelectedChannelId] = useState(
     NO_CHANNEL_FILTER.id,
   );
+  const [selectedChannelSlug, setSelectedChannelSlug] = useState<string | null>(
+    null,
+  );
   const [topicsData, setTopicsData] = useState<Array<PostWithoutId> | null>(
     null,
   );
@@ -180,8 +183,8 @@ export default function Home() {
       onCompleted: (data) => {
         if (data && data.category.categories) {
           let channels = data.category.categories.map((channel) => {
-            let { id, color, name, descriptionText } = channel;
-            return { id, color, name, description: descriptionText ?? null };
+            let { id, color, name, slug, descriptionText } = channel;
+            return { id, color, name, slug: slug ?? null, description: descriptionText ?? null };
           });
           storage.setItem('channels', channels);
         }
@@ -239,7 +242,7 @@ export default function Home() {
   } = useLazyTopicList({
     variables: isNoChannelFilter(selectedChannelId)
       ? { sort: sortState, page, username }
-      : { sort: sortState, categoryId: selectedChannelId, page, username },
+      : { sort: sortState, categoryId: selectedChannelId, page, username, slug: selectedChannelSlug },
     onError: () => {
       setRefreshing(false);
       setLoading(false);
@@ -293,6 +296,7 @@ export default function Home() {
       let channels = storage.getItem('channels');
       if (channels && receivedChannelId) {
         setSelectedChannelId(receivedChannelId);
+        setSelectedChannelSlug(channels.find((channel) => channel.id === receivedChannelId)?.slug ?? null);
       } else if (channels) {
         setSelectedChannelId(NO_CHANNEL_FILTER.id);
       }
@@ -385,6 +389,7 @@ export default function Home() {
       : {
           sort: sortState,
           categoryId: selectedChannelId,
+          slug: selectedChannelSlug,
           page: FIRST_PAGE,
         };
     setTopicsData(null);
@@ -428,6 +433,7 @@ export default function Home() {
         sort: sortState,
         page: nextPage,
         categoryId: selectedChannelId,
+        slug: selectedChannelSlug,
       };
     }
     try {

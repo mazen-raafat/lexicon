@@ -7,6 +7,7 @@ export const TOPICS = gql`
     $topPeriod: TopPeriodEnum
     $tag: String
     $categoryId: Int
+    $slug: String
     $username: String
   ) {
     topics(
@@ -15,6 +16,7 @@ export const TOPICS = gql`
       topPeriod: $topPeriod
       tag: $tag
       categoryId: $categoryId
+      slug: $slug
       username: $username
     ) {
       users {
