@@ -14,7 +14,7 @@ module.exports = {
       type: 'ios.app',
       binaryPath: 'bin/IOS/kc.app',
       build:
-        'xcodebuild -workspace ios/lexicon.xcworkspace -scheme kc -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | npx excpretty ./',
+        'xcodebuild -workspace ios/lexicon.xcworkspace -scheme lexicon -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | npx excpretty ./',
     },
     'android.debug': {
       type: 'android.apk',
