@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "KC",
-    "slug": "KC",
-    "scheme": "kc",
+    "name": "lexicon",
+    "slug": "lexicon",
+    "scheme": "lexicon",
     "currentFullName": "@<username>/<slugName>",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -67,12 +67,12 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.kc"
+      "bundleIdentifier": "com.lexicon"
     },
     "android": {
       "permissions": [],
       "versionCode": 1,
-      "package": "com.kc"
+      "package": "com.lexicon"
     },
     "web": {
       "favicon": "./assets/favicon.png"
