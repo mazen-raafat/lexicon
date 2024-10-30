@@ -31,12 +31,15 @@ import { useUpdateApp } from '../hooks/useUpdateApp';
 
 import RootStackNavigator from './RootStackNavigator';
 import { navigationRef } from './NavigationService';
+import {useSiteSettings} from "../hooks";
+import {SiteSetting} from "../generated/server";
 
 export default function AppNavigator() {
   const { colorScheme } = useColorScheme();
   const useInitialLoadResult = useInitialLoad();
   const { setRedirectPath } = useRedirect();
   const auth = useAuth();
+  const siteSetting: SiteSetting = useSiteSettings() as unknown as SiteSetting;
   const styles = useStyles();
   const { loading: appUpdateLoading } = useUpdateApp();
 
@@ -58,7 +61,7 @@ export default function AppNavigator() {
             theme={darkMode ? DarkTheme : DefaultTheme}
             ref={navigationRef}
           >
-            <RootStackNavigator authProps={auth} />
+            <RootStackNavigator authProps={auth} siteSettingsProps={siteSetting} />
           </NavigationContainer>
         </View>
       )}

@@ -42,14 +42,17 @@ import { RootStackParamList } from '../types';
 import { AuthContextProps } from '../utils/AuthProvider';
 
 import TabNavigator from './TabNavigator';
+import {SiteSetting} from "../generated/server";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
 type RootStackNavigatorProps = {
   authProps: Exclude<AuthContextProps, { isLoading: true }>;
+  siteSettingsProps: SiteSetting;
 };
 export default function RootStackNavigator(props: RootStackNavigatorProps) {
   const { authProps } = props;
+  const { loginRequired } = props.siteSettingsProps;
   const { navHeader, navModal, navNoShadow, shadow } = useTheme();
 
   return (
@@ -66,7 +69,7 @@ export default function RootStackNavigator(props: RootStackNavigatorProps) {
            *  First condition for private discourse where you need login
            * */
 
-          !authProps.token && !authProps.canSignUp ? (
+          !authProps.token && loginRequired ? (
             <RootStack.Screen
               name="Login"
               component={Login}
