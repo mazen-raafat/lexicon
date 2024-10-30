@@ -39,6 +39,11 @@ export let SiteSetting = objectType({
     t.boolean('allowPoll');
     t.int('pollCreateMinimumTrustLevel');
 
+    /**
+     * This field is used for login
+     */
+    t.boolean('loginRequired');
+
     t.list.field('groups', {
       type: 'GroupSiteSetting',
     });

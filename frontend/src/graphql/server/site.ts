@@ -49,6 +49,7 @@ export const SITE = gql`
       allowPoll
       pollCreateMinimumTrustLevel
       enableLexiconPushNotifications
+      loginRequired
     }
   }
 `;
