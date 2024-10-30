@@ -80,3 +80,6 @@ export const PROSE_DISCOURSE_UPLOAD_HOST =
 // request that is dispatched before the server begins listening on its assigned host.
 export const SHOULD_VALIDATE_DISCOURSE =
   process.env.SKIP_CHECK_DISCOURSE === undefined;
+
+export const PROSE_DISCOURSE_API_KEY = process.env.PROSE_DISCOURSE_API_KEY as string;
+export const PROSE_DISCOURSE_API_USERNAME = process.env.PROSE_DISCOURSE_API_USERNAME as string;

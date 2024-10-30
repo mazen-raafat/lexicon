@@ -5,7 +5,10 @@ import {
   PROSE_DISCOURSE_HOST,
   SHOULD_VALIDATE_DISCOURSE,
   EXIT_CODE_INVALID_ARGUMENT,
+  PROSE_DISCOURSE_API_KEY,
+  PROSE_DISCOURSE_API_USERNAME
 } from '../constants';
+import * as console from "node:console";
 
 export async function checkDiscourseReachability() {
   if (!SHOULD_VALIDATE_DISCOURSE) {
@@ -17,8 +20,18 @@ export async function checkDiscourseReachability() {
   );
 
   let response: AxiosResponse;
+
   try {
-    response = await axios.get(PROSE_DISCOURSE_HOST);
+    if (PROSE_DISCOURSE_API_KEY && PROSE_DISCOURSE_API_USERNAME) {
+      response = await axios.get(PROSE_DISCOURSE_HOST, {
+        headers: {
+          'Api-Key': PROSE_DISCOURSE_API_KEY,
+          'Api-Username': PROSE_DISCOURSE_API_USERNAME,
+        }
+      });
+    } else {
+      response = await axios.get(PROSE_DISCOURSE_HOST);
+    }
   } catch (error) {
     console.error(`\n\nERROR: ${PROSE_DISCOURSE_HOST}`);
 
