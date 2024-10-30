@@ -2,7 +2,7 @@ import { FieldResolver, queryField } from 'nexus';
 import { AxiosError } from 'axios';
 
 import { Context } from '../../types';
-import { PROSE_DISCOURSE_HOST } from '../../constants';
+import {PROSE_DISCOURSE_API_KEY, PROSE_DISCOURSE_API_USERNAME, PROSE_DISCOURSE_HOST} from '../../constants';
 import { logger } from '../../logger';
 
 let healthQueryResolver: FieldResolver<'Query', 'health'> = async (
@@ -13,7 +13,12 @@ let healthQueryResolver: FieldResolver<'Query', 'health'> = async (
   let discourseError: Error | undefined;
   let isDiscourseReachable = true;
   try {
-    await context.client.get('/site.json');
+    let siteUrl = `/site.json`;
+    let headers = {
+      ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
+      ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
+    }
+    await context.client.get(siteUrl, { headers });
   } catch (error) {
     let e = error as AxiosError;
     discourseError = e;

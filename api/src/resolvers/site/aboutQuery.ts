@@ -2,6 +2,7 @@ import { FieldResolver, queryField } from 'nexus';
 
 import { errorHandler } from '../../helpers';
 import { Context } from '../../types';
+import {PROSE_DISCOURSE_API_KEY, PROSE_DISCOURSE_API_USERNAME} from "../../constants";
 
 let aboutResolver: FieldResolver<'Query', 'about'> = async (
   _,
@@ -17,6 +18,10 @@ let aboutResolver: FieldResolver<'Query', 'about'> = async (
      * And for the previous version discourse it use topic_count and post_count
      */
 
+    let headers = {
+      ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
+      ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
+    }
     let {
       data: {
         about: {
@@ -28,7 +33,7 @@ let aboutResolver: FieldResolver<'Query', 'about'> = async (
           },
         },
       },
-    } = await context.client.get(siteUrl);
+    } = await context.client.get(siteUrl, { headers });
 
     return {
       topicCount: topicCount || topicsCount,

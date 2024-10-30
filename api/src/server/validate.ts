@@ -20,18 +20,12 @@ export async function checkDiscourseReachability() {
   );
 
   let response: AxiosResponse;
-
+  let headers = {
+    ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
+    ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
+  }
   try {
-    if (PROSE_DISCOURSE_API_KEY && PROSE_DISCOURSE_API_USERNAME) {
-      response = await axios.get(PROSE_DISCOURSE_HOST, {
-        headers: {
-          'Api-Key': PROSE_DISCOURSE_API_KEY,
-          'Api-Username': PROSE_DISCOURSE_API_USERNAME,
-        }
-      });
-    } else {
-      response = await axios.get(PROSE_DISCOURSE_HOST);
-    }
+    response = await axios.get(PROSE_DISCOURSE_HOST, { headers});
   } catch (error) {
     console.error(`\n\nERROR: ${PROSE_DISCOURSE_HOST}`);
 

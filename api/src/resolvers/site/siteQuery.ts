@@ -5,6 +5,8 @@ import { errorHandler } from '../../helpers';
 import { Context } from '../../types';
 import {
   PROSE_DISCOURSE_HOST,
+  PROSE_DISCOURSE_API_KEY,
+  PROSE_DISCOURSE_API_USERNAME,
   UNCATEGORIZED_CATEGORY_ID,
 } from '../../constants';
 
@@ -15,6 +17,10 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
 ) => {
   try {
     let siteUrl = `/site.json`;
+    let headers = {
+      ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
+      ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
+    }
     let {
       data: {
         can_create_tag: canCreateTag,
@@ -26,7 +32,7 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
         lexicon,
         ...siteData
       },
-    } = await context.client.get(siteUrl);
+    } = await context.client.get(siteUrl, { headers });
 
     topicFlagTypes = camelcaseKey(topicFlagTypes, { deep: true });
 
@@ -64,8 +70,9 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
         emoji_set: emojiSet = '',
         poll_enabled: allowPoll = true,
         poll_minimum_trust_level_to_create: pollCreateMinimumTrustLevel = 1,
+        login_required: loginRequired = false,
       },
-    } = await context.client.get(siteSettingsUrl);
+    } = await context.client.get(siteSettingsUrl, { headers });
 
     return {
       canCreateTag: canCreateTag || false,
@@ -91,6 +98,7 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
       discourseBaseUrl: PROSE_DISCOURSE_HOST || '',
       allowPoll,
       pollCreateMinimumTrustLevel,
+      loginRequired,
       enableLexiconPushNotifications:
         lexicon?.settings.lexicon_push_notifications_enabled || false,
       ...camelcaseKey(siteData, { deep: true }),
