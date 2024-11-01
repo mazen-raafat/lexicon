@@ -399,6 +399,12 @@ export default function Home() {
 
   const onPressReply = useCallback(
     (param: { topicId: number }) => {
+      const currentUserId = storage.getItem('user')?.id;
+      if (!currentUserId) {
+        errorHandlerAlert(LoginError, navigate);
+        return;
+      }
+
       let { topicId } = param;
       const cacheTopic = client.readFragment<TopicFragment>({
         id: `Topic:${topicId}`,

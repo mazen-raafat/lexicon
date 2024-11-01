@@ -4,12 +4,14 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { FIRST_POST_NUMBER } from '../../constants';
 import { ActivityIndicator, Divider } from '../../core-ui';
-import { getUpdatedLikeCount } from '../../helpers';
+import {errorHandlerAlert, getUpdatedLikeCount, LoginError, useStorage} from '../../helpers';
 import { useLikeTopicOrPost } from '../../hooks';
 import { makeStyles, useTheme } from '../../theme';
 import { useOngoingLikedTopic } from '../../utils';
 
 import { MetricItem } from './MetricItem';
+import {StackNavProp} from "../../types";
+import {useNavigation} from "@react-navigation/native";
 
 type Props = {
   title?: string;
@@ -23,6 +25,8 @@ const DEBOUNCE_WAIT_TIME = 1000;
 
 export function Metrics(props: Props) {
   const { likedTopics } = useOngoingLikedTopic();
+  const { navigate } = useNavigation<StackNavProp<'TabNav'>>();
+  const storage = useStorage();
 
   const {
     postId,
@@ -138,6 +142,11 @@ export function Metrics(props: Props) {
   const [like] = useLikeTopicOrPost();
 
   const onPressLike = useCallback(() => {
+    const currentUserId = storage.getItem('user')?.id;
+    if (!currentUserId) {
+      errorHandlerAlert(LoginError, navigate);
+      return;
+    }
     setLikeData(({ liked: prevLiked, likeCount: previousCount }) => {
       const liked = !prevLiked;
       const likeCount = getUpdatedLikeCount({
