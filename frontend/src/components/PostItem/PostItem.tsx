@@ -13,7 +13,7 @@ import { PollPreview } from '../Poll';
 
 import { PostGroupings } from './PostGroupings';
 import { PostHidden } from './PostHidden';
-import {renderEmojis} from "../../helpers/renderEmojis";
+import { renderEmojis } from '../../helpers/renderEmojis';
 
 type Props = ViewProps & {
   topicId: number;

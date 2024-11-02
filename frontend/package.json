@@ -4,7 +4,7 @@
     "quickstart": "npx expo -c",
     "typecheck": "tsc --noEmit -p .",
     "compile": "tsc --noEmit -p . --pretty",
-    "format": "prettier --write \"app/**/*.{js,jsx,json,md,ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
     "lint": "eslint --max-warnings 0 \"src/**/*.{ts,tsx}\"",
     "jestTest": "jest --coverage --passWithNoTests",

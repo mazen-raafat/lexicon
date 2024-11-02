@@ -184,7 +184,13 @@ export default function Home() {
         if (data && data.category.categories) {
           let channels = data.category.categories.map((channel) => {
             let { id, color, name, slug, descriptionText } = channel;
-            return { id, color, name, slug: slug ?? null, description: descriptionText ?? null };
+            return {
+              id,
+              color,
+              name,
+              slug: slug ?? null,
+              description: descriptionText ?? null,
+            };
           });
           storage.setItem('channels', channels);
         }
@@ -242,7 +248,13 @@ export default function Home() {
   } = useLazyTopicList({
     variables: isNoChannelFilter(selectedChannelId)
       ? { sort: sortState, page, username }
-      : { sort: sortState, categoryId: selectedChannelId, page, username, slug: selectedChannelSlug },
+      : {
+          sort: sortState,
+          categoryId: selectedChannelId,
+          page,
+          username,
+          slug: selectedChannelSlug,
+        },
     onError: () => {
       setRefreshing(false);
       setLoading(false);
@@ -296,7 +308,10 @@ export default function Home() {
       let channels = storage.getItem('channels');
       if (channels && receivedChannelId) {
         setSelectedChannelId(receivedChannelId);
-        setSelectedChannelSlug(channels.find((channel) => channel.id === receivedChannelId)?.slug ?? null);
+        setSelectedChannelSlug(
+          channels.find((channel) => channel.id === receivedChannelId)?.slug ??
+            null,
+        );
       } else if (channels) {
         setSelectedChannelId(NO_CHANNEL_FILTER.id);
       }

@@ -44,10 +44,12 @@ export function BottomMenu(props: Props) {
   };
 
   function pollAllowed() {
-    return onInsertPoll &&
-        pollSetting?.allowPoll &&
-        userTrustLevel &&
-        pollSetting.pollCreateMinimumTrustLevel <= userTrustLevel;
+    return (
+      onInsertPoll &&
+      pollSetting?.allowPoll &&
+      userTrustLevel &&
+      pollSetting.pollCreateMinimumTrustLevel <= userTrustLevel
+    );
   }
 
   return (
@@ -125,14 +127,14 @@ export function BottomMenu(props: Props) {
             />
             <Divider vertical />
             {pollAllowed() ? (
-                  <Icon
-                      name="Chart"
-                      size="l"
-                      color={colors.textLighter}
-                      onPress={onInsertPoll}
-                      style={styles.iconButton}
-                      testID="BottomMenu:IconPoll"
-                  />
+              <Icon
+                name="Chart"
+                size="l"
+                color={colors.textLighter}
+                onPress={onInsertPoll}
+                style={styles.iconButton}
+                testID="BottomMenu:IconPoll"
+              />
             ) : null}
             <Divider vertical />
           </View>

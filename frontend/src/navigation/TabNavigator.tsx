@@ -7,7 +7,11 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import { Icon, Text } from '../core-ui';
-import {Home as HomeScene, Messages, Profile as ProfileScene} from '../screens';
+import {
+  Home as HomeScene,
+  Messages,
+  Profile as ProfileScene,
+} from '../screens';
 import { makeStyles, useTheme } from '../theme';
 import { TabParamList } from '../types';
 import { useAuth } from '../utils/AuthProvider';
@@ -21,7 +25,7 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
   const useAuthResults = useAuth();
 
   function getIconName(route: { name: string }) {
-    route
+    route;
     if (route.name === 'Home') {
       return 'Home';
     } else if (route.name === 'Profile') {
@@ -51,7 +55,10 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
           if (state.index === 0 && state.index === index) {
             navigate(route.name, { backToTop: true });
           } else {
-            if ((route.name === 'Profile' || route.name === 'Messages') && !token) {
+            if (
+              (route.name === 'Profile' || route.name === 'Messages') &&
+              !token
+            ) {
               navigate('Login');
               return;
             }
@@ -106,9 +113,9 @@ export default function TabNavigator() {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-          name="Messages"
-          component={Messages}
-          options={{ title: t('Messages') }}
+        name="Messages"
+        component={Messages}
+        options={{ title: t('Messages') }}
       />
       <Tab.Screen
         name="Profile"

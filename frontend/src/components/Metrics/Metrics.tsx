@@ -4,14 +4,19 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { FIRST_POST_NUMBER } from '../../constants';
 import { ActivityIndicator, Divider } from '../../core-ui';
-import {errorHandlerAlert, getUpdatedLikeCount, LoginError, useStorage} from '../../helpers';
+import {
+  errorHandlerAlert,
+  getUpdatedLikeCount,
+  LoginError,
+  useStorage,
+} from '../../helpers';
 import { useLikeTopicOrPost } from '../../hooks';
 import { makeStyles, useTheme } from '../../theme';
 import { useOngoingLikedTopic } from '../../utils';
 
 import { MetricItem } from './MetricItem';
-import {StackNavProp} from "../../types";
-import {useNavigation} from "@react-navigation/native";
+import { StackNavProp } from '../../types';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {
   title?: string;

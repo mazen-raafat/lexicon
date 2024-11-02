@@ -42,7 +42,7 @@ import { RootStackParamList } from '../types';
 import { AuthContextProps } from '../utils/AuthProvider';
 
 import TabNavigator from './TabNavigator';
-import {SiteSetting} from "../generated/server";
+import { SiteSetting } from '../generated/server';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 

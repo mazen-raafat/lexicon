@@ -31,8 +31,8 @@ import { useUpdateApp } from '../hooks/useUpdateApp';
 
 import RootStackNavigator from './RootStackNavigator';
 import { navigationRef } from './NavigationService';
-import {useSiteSettings} from "../hooks";
-import {SiteSetting} from "../generated/server";
+import { useSiteSettings } from '../hooks';
+import { SiteSetting } from '../generated/server';
 
 export default function AppNavigator() {
   const { colorScheme } = useColorScheme();
@@ -61,7 +61,10 @@ export default function AppNavigator() {
             theme={darkMode ? DarkTheme : DefaultTheme}
             ref={navigationRef}
           >
-            <RootStackNavigator authProps={auth} siteSettingsProps={siteSetting} />
+            <RootStackNavigator
+              authProps={auth}
+              siteSettingsProps={siteSetting}
+            />
           </NavigationContainer>
         </View>
       )}
