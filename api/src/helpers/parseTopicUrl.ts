@@ -13,7 +13,13 @@ export type FilterInput = {
   slug?: string | null;
 };
 
-const parseTopicUrl = ({ sort, topPeriod, tag, categoryId, slug }: FilterInput) => {
+const parseTopicUrl = ({
+  sort,
+  topPeriod,
+  tag,
+  categoryId,
+  slug,
+}: FilterInput) => {
   let sortBy = sort.toLowerCase();
   if (sort === 'TOP' && topPeriod && !tag) {
     sortBy = `${sortBy}/${topPeriod.toLowerCase()}`;

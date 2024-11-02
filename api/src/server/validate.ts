@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+import * as console from 'node:console';
+
 import axios, { AxiosResponse } from 'axios';
 
 import {
@@ -6,9 +7,8 @@ import {
   SHOULD_VALIDATE_DISCOURSE,
   EXIT_CODE_INVALID_ARGUMENT,
   PROSE_DISCOURSE_API_KEY,
-  PROSE_DISCOURSE_API_USERNAME
+  PROSE_DISCOURSE_API_USERNAME,
 } from '../constants';
-import * as console from "node:console";
 
 export async function checkDiscourseReachability() {
   if (!SHOULD_VALIDATE_DISCOURSE) {
@@ -22,10 +22,12 @@ export async function checkDiscourseReachability() {
   let response: AxiosResponse;
   let headers = {
     ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
-    ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
-  }
+    ...(PROSE_DISCOURSE_API_USERNAME && {
+      'Api-Username': PROSE_DISCOURSE_API_USERNAME,
+    }),
+  };
   try {
-    response = await axios.get(PROSE_DISCOURSE_HOST, { headers});
+    response = await axios.get(PROSE_DISCOURSE_HOST, { headers });
   } catch (error) {
     console.error(`\n\nERROR: ${PROSE_DISCOURSE_HOST}`);
 

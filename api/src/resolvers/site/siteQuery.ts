@@ -19,8 +19,10 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
     let siteUrl = `/site.json`;
     let headers = {
       ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
-      ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
-    }
+      ...(PROSE_DISCOURSE_API_USERNAME && {
+        'Api-Username': PROSE_DISCOURSE_API_USERNAME,
+      }),
+    };
     let {
       data: {
         can_create_tag: canCreateTag,

@@ -2,7 +2,10 @@ import { FieldResolver, queryField } from 'nexus';
 
 import { errorHandler } from '../../helpers';
 import { Context } from '../../types';
-import {PROSE_DISCOURSE_API_KEY, PROSE_DISCOURSE_API_USERNAME} from "../../constants";
+import {
+  PROSE_DISCOURSE_API_KEY,
+  PROSE_DISCOURSE_API_USERNAME,
+} from '../../constants';
 
 let aboutResolver: FieldResolver<'Query', 'about'> = async (
   _,
@@ -20,8 +23,10 @@ let aboutResolver: FieldResolver<'Query', 'about'> = async (
 
     let headers = {
       ...(PROSE_DISCOURSE_API_KEY && { 'Api-Key': PROSE_DISCOURSE_API_KEY }),
-      ...(PROSE_DISCOURSE_API_USERNAME && { 'Api-Username': PROSE_DISCOURSE_API_USERNAME }),
-    }
+      ...(PROSE_DISCOURSE_API_USERNAME && {
+        'Api-Username': PROSE_DISCOURSE_API_USERNAME,
+      }),
+    };
     let {
       data: {
         about: {
