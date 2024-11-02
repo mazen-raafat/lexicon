@@ -53,8 +53,9 @@ it('latest art tag with game category', () => {
     sort: 'LATEST',
     tag: 'art',
     categoryId: 2,
+    slug: "slug",
   };
-  const expectedOutput = 'tags/c/2/art/l/latest';
+  const expectedOutput = 'tags/c/slug/2/art/l/latest';
   let topicUrl = parseTopicUrl(filterInput);
   expect(topicUrl).toEqual(expectedOutput);
 });
@@ -65,8 +66,9 @@ it('top art tag with game category with no daily because there is tag', () => {
     tag: 'art',
     categoryId: 2,
     topPeriod: 'DAILY',
+    slug: "slug",
   };
-  const expectedOutput = 'tags/c/2/art/l/top';
+  const expectedOutput = 'tags/c/slug/2/art/l/top';
   let topicUrl = parseTopicUrl(filterInput);
   expect(topicUrl).toEqual(expectedOutput);
 });
@@ -75,8 +77,9 @@ it('latest with game category', () => {
   const filterInput: FilterInput = {
     sort: 'LATEST',
     categoryId: 2,
+    slug: "slug",
   };
-  const expectedOutput = 'c/2/l/latest';
+  const expectedOutput = 'c/slug/2/l/latest';
   let topicUrl = parseTopicUrl(filterInput);
   expect(topicUrl).toEqual(expectedOutput);
 });
