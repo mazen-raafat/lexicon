@@ -12,6 +12,7 @@ import { StackNavProp, UserDetail } from '../../types';
 import { useAuth } from '../../utils/AuthProvider';
 
 import MenuItem from './components/MenuItem';
+import { SiteSetting } from '../../generated/server';
 
 export default function Profile() {
   const styles = useStyles();
@@ -70,6 +71,7 @@ export default function Profile() {
 
   const userImage = getImage(data?.userProfile.user.avatar || '', 'xl');
   const useAuthResults = useAuth();
+  const siteSetting: SiteSetting = useSiteSettings() as unknown as SiteSetting;
 
   const onLogout = async () => {
     try {
@@ -176,13 +178,17 @@ export default function Profile() {
                 onPress={() => navigate('Notifications')}
               />
               <Divider style={styles.dividerList} />
-              <MenuItem
-                title={t('Messages')}
-                iconName="Mail"
-                onPress={() => navigate('Messages')}
-                testID="Profile:MenuItem:Messages"
-              />
-              <Divider style={styles.dividerList} />
+              {siteSetting.chatEnabled && (
+                <>
+                  <MenuItem
+                    title={t('Messages')}
+                    iconName="Mail"
+                    onPress={() => navigate('Messages')}
+                    testID="Profile:MenuItem:Messages"
+                  />
+                  <Divider style={styles.dividerList} />
+                </>
+              )}
               <MenuItem
                 title={t('Activity')}
                 iconName="Chart"

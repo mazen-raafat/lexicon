@@ -44,6 +44,8 @@ export let SiteSetting = objectType({
      */
     t.boolean('loginRequired');
 
+    t.boolean('chatEnabled')
+
     t.list.field('groups', {
       type: 'GroupSiteSetting',
     });

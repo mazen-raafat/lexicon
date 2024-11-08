@@ -31,5 +31,6 @@ export const siteSetting = {
   allowPoll: true,
   pollCreateMinimumTrustLevel: 1,
   enableLexiconPushNotifications: false,
-  loginRequired: false
+  loginRequired: false,
+  chatEnabled: false
 };

@@ -87,9 +87,17 @@ export default function RootStackNavigator(props: RootStackNavigatorProps) {
             <>
               <RootStack.Screen
                 name="TabNav"
-                component={TabNavigator}
+                component={undefined}
                 options={{ title: '', headerShown: false }}
-              />
+              >
+                {(screenProps) => (
+                  <TabNavigator
+                    {...screenProps}
+                    siteSetting={props.siteSettingsProps}
+                  />
+                )}
+              </RootStack.Screen>
+
               {/* this one require for tab in profile  */}
               <RootStack.Screen
                 name="Login"
@@ -106,9 +114,16 @@ export default function RootStackNavigator(props: RootStackNavigatorProps) {
               <>
                 <RootStack.Screen
                   name="TabNav"
-                  component={TabNavigator}
+                  component={undefined}
                   options={{ title: '', headerShown: false }}
-                />
+                >
+                  {(screenProps) => (
+                    <TabNavigator
+                      {...screenProps}
+                      siteSetting={props.siteSettingsProps}
+                    />
+                  )}
+                </RootStack.Screen>
                 <RootStack.Screen
                   name="Messages"
                   component={Messages}

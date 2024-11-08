@@ -73,6 +73,7 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
         poll_enabled: allowPoll = true,
         poll_minimum_trust_level_to_create: pollCreateMinimumTrustLevel = 1,
         login_required: loginRequired = false,
+        chat_enabled: chatEnabled = true,
       },
     } = await context.client.get(siteSettingsUrl, { headers });
 
@@ -101,6 +102,7 @@ let siteResolver: FieldResolver<'Query', 'site'> = async (
       allowPoll,
       pollCreateMinimumTrustLevel,
       loginRequired,
+      chatEnabled,
       enableLexiconPushNotifications:
         lexicon?.settings.lexicon_push_notifications_enabled || false,
       ...camelcaseKey(siteData, { deep: true }),

@@ -15,6 +15,7 @@ import {
 import { makeStyles, useTheme } from '../theme';
 import { TabParamList } from '../types';
 import { useAuth } from '../utils/AuthProvider';
+import { SiteSetting } from '../generated/server';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -101,27 +102,52 @@ function TabBar({ state, navigation: { navigate } }: BottomTabBarProps) {
   );
 }
 
-export default function TabNavigator() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      tabBar={(props) => <TabBar {...props} />}
-    >
+export default function TabNavigator({
+  siteSetting,
+}: {
+  siteSetting: SiteSetting;
+}) {
+  const commonScreens = (
+    <>
       <Tab.Screen
         name="Home"
         component={HomeScene}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Messages"
-        component={Messages}
-        options={{ title: t('Messages') }}
-      />
-      <Tab.Screen
         name="Profile"
         component={ProfileScene}
         options={{ headerShown: false }}
       />
+    </>
+  );
+
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBar={(props) => <TabBar {...props} />}
+    >
+      {
+        <Tab.Screen
+          name="Home"
+          component={HomeScene}
+          options={{ headerShown: false }}
+        />
+      }
+      {siteSetting?.chatEnabled && (
+        <Tab.Screen
+          name="Messages"
+          component={Messages}
+          options={{ title: t('Messages') }}
+        />
+      )}
+      {
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScene}
+          options={{ headerShown: false }}
+        />
+      }
     </Tab.Navigator>
   );
 }

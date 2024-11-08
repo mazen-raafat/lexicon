@@ -50,6 +50,7 @@ export const SITE = gql`
       pollCreateMinimumTrustLevel
       enableLexiconPushNotifications
       loginRequired
+      chatEnabled
     }
   }
 `;
